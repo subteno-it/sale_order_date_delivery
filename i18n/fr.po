@@ -1,0 +1,32 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sale_order_date_delivery
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-07-18 10:25+0000\n"
+"PO-Revision-Date: 2011-07-18 12:25+0100\n"
+"Last-Translator: Sylvain Garancher <sylvain.garancher@syleam.fr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: sale_order_date_delivery
+#: field:sale.order.line,date_planned:0
+msgid "Date"
+msgstr "Date"
+
+#. module: sale_order_date_delivery
+#: model:ir.model,name:sale_order_date_delivery.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bon de commandes"
+
+#. module: sale_order_date_delivery
+#: help:sale.order.line,date_planned:0
+msgid "Date planned for this line"
+msgstr "Date prévu pour cette ligne"
+
