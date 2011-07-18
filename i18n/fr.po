@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-07-18 10:25+0000\n"
-"PO-Revision-Date: 2011-07-18 12:25+0100\n"
+"PO-Revision-Date: 2011-07-18 16:59+0100\n"
 "Last-Translator: Sylvain Garancher <sylvain.garancher@syleam.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,5 +28,5 @@ msgstr "Ligne de bon de commandes"
 #. module: sale_order_date_delivery
 #: help:sale.order.line,date_planned:0
 msgid "Date planned for this line"
-msgstr "Date prévu pour cette ligne"
+msgstr "Date prévue pour cette ligne"
 
