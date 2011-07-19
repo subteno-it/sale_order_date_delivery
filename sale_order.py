@@ -33,16 +33,22 @@ class sale_order_line(osv.osv):
         """
         Returns the delay from the planned date
         """
-        # Retrieve date_planned value as a date object
-        date_planned = self.read(cr, uid, ids[0], ['date_planned'], context=context)['date_planned'].split('-')
-        date_planned = date(int(date_planned[0]), int(date_planned[1]), int(date_planned[2]))
-        # Retrieve the company security lead
-        security_lead = self.pool.get('res.users').browse(cr, uid, uid).company_id.security_lead
+        res = {}
+        date_data = self.read(cr, uid, ids, ['date_planned'], context=context)
+        for data in date_data:
+            # Retrieve date_planned value as a date object
+            date_planned = data['date_planned'].split('-')
+            date_planned = date(int(date_planned[0]), int(date_planned[1]), int(date_planned[2]))
+            # Retrieve the company security lead
+            security_lead = self.pool.get('res.users').browse(cr, uid, uid).company_id.security_lead
 
-        # Computes the delay from date planned and company security lead
-        delay = date_planned - date.today() + timedelta(days=security_lead)
+            # Computes the delay from date planned and company security lead
+            delay = date_planned - date.today() + timedelta(days=security_lead)
 
-        return {ids[0]: delay.days}
+            # Stores result
+            res[data['id']] = delay.days
+
+        return res
 
     _columns = {
         'date_planned': fields.date('Date', required=True, help='Date planned for this line', readonly=True, states={'draft': [('readonly', False)]}),
