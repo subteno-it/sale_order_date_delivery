@@ -1,0 +1,25 @@
+-
+    1. Check the delay value, single line
+-
+    # Create the sale order
+    !record {model: sale.order.line, id: sodl_sale_order_line_test1}:
+        name: SODL Test 1
+        order_id: 1
+        product_uom: product.product_uom_unit
+        product_uom_qty: 5
+        type: make_to_stock
+#        date_planned: '2011-07-29'
+-
+    # Sets the date planned on the order line (didn't found how to make in YAML directly)
+    !python {model: sale.order.line}: |
+        from datetime import date, timedelta
+        self.write(cr, uid, [ref('sodl_sale_order_line_test1')], {'date_planned': date.today() + timedelta(11)}, context=context)
+-
+    # Set the company security lead (to be sure not use a modified value)
+    !record {model: res.company, id: base.main_company}:
+        security_lead: 5
+-
+    # Check the value computed for delay
+    !assert {model: sale.order.line, id: sodl_sale_order_line_test1, string: Delay value}:
+        - delay == 16
+
