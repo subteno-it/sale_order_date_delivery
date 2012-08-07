@@ -31,10 +31,14 @@
             <field name="priority" eval="16"/>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page/field[@name='order_line']/form/notebook/page/field[@name='delay']" position="replace">
-                    <field name="delay" groups="base.group_extended" invisible="1"/>
-                    <field name="date_planned" groups="base.group_extended"/>
-                </xpath>
+                <data>
+                    <xpath expr="/form/notebook/page/field[@name='order_line']/form/notebook/page/field[@name='delay']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                    <xpath expr="/form/notebook/page/field[@name='order_line']/form/notebook/page/field[@name='delay']" position="after">
+                        <field name="date_planned" groups="base.group_extended"/>
+                    </xpath>
+                </data>
             </field>
         </record>
 

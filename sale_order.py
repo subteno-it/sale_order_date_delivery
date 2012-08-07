@@ -24,7 +24,7 @@
 
 from osv import osv
 from osv import fields
-from datetime import date, timedelta
+from datetime import datetime, date, timedelta
 
 class sale_order_line(osv.osv):
     _inherit = 'sale.order.line'
@@ -37,8 +37,7 @@ class sale_order_line(osv.osv):
         date_data = self.read(cr, uid, ids, ['date_planned'], context=context)
         for data in date_data:
             # Retrieve date_planned value as a date object
-            date_planned = data['date_planned'].split('-')
-            date_planned = date(int(date_planned[0]), int(date_planned[1]), int(date_planned[2]))
+            date_planned = datetime.strptime(data['date_planned'], '%Y-%m-%d').date()
             # Retrieve the company security lead
             security_lead = self.pool.get('res.users').browse(cr, uid, uid).company_id.security_lead
 
@@ -55,14 +54,8 @@ class sale_order_line(osv.osv):
         'delay': fields.function(_get_delay, method=True, string='Delivery Lead Time', type='float', store=False, help='Number of days between the order confirmation the shipping of the products to the customer', ),
     }
 
-    def _get_default_date(self, cr, uid, context=None):
-        """
-        Returns the default date
-        """
-        return str(date.today())
-
     _defaults = {
-        'date_planned': lambda self, cr, uid, c: self._get_default_date(cr, uid, context=c),
+        'date_planned': fields.date.context_today,
     }
 
 sale_order_line()
